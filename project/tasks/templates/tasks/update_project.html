@@ -1,0 +1,15 @@
+{% extends 'tasks/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block body_block %}
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Update Project Here :</h1>
+      <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit">Submit</button>
+      </form> 
+</div>
+  </div>
+{% endblock %}

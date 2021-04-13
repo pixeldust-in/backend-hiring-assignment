@@ -1,0 +1,48 @@
+{% extends 'tasks/base.html' %}
+
+
+{% block body_block %}
+    <div class="container">
+        <h2>Projects -</h2>
+        <br>
+        {% if projects %}
+            <table class="table table-sm table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Desctiption</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Actions</th>
+                        <th>Create Task</th>
+                        <th>Tasks</th>
+                        
+                    </tr>
+                </thead>
+                {% for row in projects %}
+                    <tbody>
+                        <tr>
+                            <td>{{ row.id }}</td>
+                            <td>{{ row.project_name }}</td>
+                            <td>{{ row.description }}</td>
+                            <td>{{ row.start_date }}</td>
+                            <td>{{ row.end_date }}</td>
+                            <td>
+                                <a class="btn btn-primary" href="/tasks/update-project/{{row.id}}">Update</a>
+                                <a class="btn btn-primary" href="/tasks/delete-project/{{row.id}}">Delete</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" href="/tasks/create-task/{{row.id}}">Create Task</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" href="/tasks/get-tasks/{{row.id}}">Tasks</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                {% endfor %}
+            </table>
+        {% endif %}
+        <a class="btn btn-primary" href="/tasks/create-project">Create Project</a>
+    </div>
+{% endblock %}

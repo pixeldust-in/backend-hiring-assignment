@@ -1,0 +1,40 @@
+{% extends 'tasks/base.html' %}
+
+
+{% block body_block %}
+    <div class="container">
+        <h2>Tasks -</h2>
+        <br>
+        {% if tasks %}
+            <table class="table table-sm table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Desctiption</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                        <th>Project</th>
+                        
+                    </tr>
+                </thead>
+                {% for row in tasks %}
+                    <tbody>
+                        <tr>
+                            <td>{{ row.id }}</td>
+                            <td>{{ row.task_name }}</td>
+                            <td>{{ row.description }}</td>
+                            <td>{{ row.status }}</td>
+                            <td>
+                                <a class="btn btn-primary" href="/tasks/update-task/{{row.id}}">Update</a>
+                                <a class="btn btn-primary" href="/tasks/delete-project/{{row.id}}">Delete</a>
+                            </td>
+                            <td>{{ row.project_name }}</td>
+                        </tr>
+                    </tbody>
+                {% endfor %}
+            </table>
+
+        {% endif %}
+    </div>
+{% endblock %}
