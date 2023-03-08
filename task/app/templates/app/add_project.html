@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>
+            Form 
+        </title>
+    </head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        Name : {{ form.name }}
+        Client : {{ form.client }}
+        Start-Date : {{ form.start_date }}
+End-Date : {{ form.end_date }}
+
+<button type="submit">Submit</button>
+    </form>
+</body>
+</html>

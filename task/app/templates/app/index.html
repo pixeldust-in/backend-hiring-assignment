@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Home
+        </title>
+    </head>
+    <body>
+        <h1> Following are the Urls:-</h1><br><br>
+
+        {% for key, value in urls.items %}
+        {{ key }} : {{ value }}<br><br>
+        {% endfor %}
+    </body>
+</html>
