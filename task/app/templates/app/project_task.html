@@ -13,6 +13,14 @@
   <br>
   <br>
   
+  {% for p in project %}
+  <h1 style="text-align: center;">Project Name : {{ p.name }}</h1><br>
+  <h2 style="text-align: center;">Client : {{ p.client }}</h2><br>
+  <h3 style="text-align: center;">Start Date : {{ p.start_date}}</h3><br>
+  <h3 style="text-align: center;"> End Date : {{ p.end_date }}</h3><br><br>
+  {% endfor %}
+  
+  
     <form>
         <a href="{% url 'new_task' %}">
             &nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-secondary">Add Task</button>

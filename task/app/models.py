@@ -13,7 +13,7 @@ class Client(models.Model):
 
 class Project(models.Model):
     name = models.CharField(max_length=120)
-    client = models.CharField(max_length=120)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
     start_date = models.DateField(default=timezone.now())
     end_date = models.DateField()
 

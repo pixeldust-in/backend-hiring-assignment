@@ -102,9 +102,10 @@ def edit_project(request,pk):
 
 
 def project_task(request,pk):
+    project = Project.objects.filter(pk=pk)
     task = Task.objects.filter(project=pk)
 
-    return render(request,'app/project_task.html',{'tasks':task})
+    return render(request,'app/project_task.html',{'tasks':task,"project":project})
 
 
 
