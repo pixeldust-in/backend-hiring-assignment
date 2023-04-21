@@ -1,0 +1,94 @@
+<!-- Extended base.html file to home.html -->
+{% extends 'TaskManagerApp/base.html' %}
+
+<!-- CSS block -->
+{% block CSS %}
+{% endblock CSS %}
+
+<!-- JS Block -->
+{% block JS %}
+{% endblock JS %}
+
+<!-- Title Block -->
+{% block title %}
+{% endblock title %}
+
+
+<!-- Block Body -->
+{% block body %}
+
+<!-- Below form contains 2 inputs for same label first one to display which won't be editable for user and second for saving in database -->
+
+<div class="container">
+    <form action="{% url 'edittask' data.id %}" method="post">
+
+        {% csrf_token %}
+
+        <div class=" text-dark mb-3 fw-bold">
+
+            <label for="id_TaskName">Task Name:</label>
+            <input type="text" name="TaskName" class="form-control" maxlength="100" disabled value="{{data.TaskName}}" required id="id_TaskName">
+            <input type="text" name="TaskName" class="form-control" maxlength="100" hidden value="{{data.TaskName}}" required id="id_TaskName">
+            <span style="color: red;">{{form.TaskName.errors}}</span>
+
+        </div>
+
+        <div class=" text-dark mb-3 fw-bold">
+
+            <label for="id_TDescription">Task Description:</label>
+            <textarea name="TDescription" cols="40" rows="10" class="form-control" disabled required id="id_TDescription">{{data.TDescription}}</textarea>
+            <textarea name="TDescription" cols="40" rows="10" class="form-control"hidden required id="id_TDescription">{{data.TDescription}}</textarea>
+            <span style="color: red;">{{form.TDescription.errors}}</span>
+
+        </div>
+
+        <div class=" text-dark mb-3 fw-bold">
+
+            <label for="">Project:</label>
+            <input type="text" name="Project" class="form-control" disabled value="{{data.Project}}" required id="id_Project">
+            <input type="text" name="Project" class="form-control" hidden value="{{data.Project}}" required id="id_Project">
+            
+            <span style="color: red;">{{form.Project.errors}}</span>
+
+        </div>
+
+        <div class=" text-dark mb-3 fw-bold">
+
+            <label>Status:<span style="color:red">*</span></label>
+            <div id="id_Status">
+                <div>
+                    <label for="id_Status_0"><input type="radio" name="Status" value="TODO" required id="id_Status_0">
+                        TODO</label>
+
+                </div>
+                <div>
+                    <label for="id_Status_1"><input type="radio" name="Status" value="WIP" required id="id_Status_1">
+                        WIP</label>
+
+                </div>
+                <div>
+                    <label for="id_Status_2"><input type="radio" name="Status" value="ONHOLD" required id="id_Status_2">
+                        ONHOLD</label>
+
+                </div>
+                <div>
+                    <label for="id_Status_3"><input type="radio" name="Status" value="DONE" required id="id_Status_3">
+                        DONE</label>
+
+                </div>
+            </div>
+            <span style="color: red;">{{form.Status.errors}}</span>
+
+        </div>
+
+
+
+        <div class="mb-3 text-center">
+
+            <input type="submit" value="Save" class="btn btn-success btn-lg">
+
+        </div>
+    </form>
+</div>
+
+{% endblock body %}

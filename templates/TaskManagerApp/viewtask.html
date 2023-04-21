@@ -1,0 +1,54 @@
+<!-- Extended base.html file to home.html -->
+{% extends 'TaskManagerApp/base.html' %}
+
+<!-- CSS block -->
+{% block CSS %}
+{% endblock CSS %}
+
+<!-- JS Block -->
+{% block JS %}
+{% endblock JS %}
+
+<!-- Title Block -->
+{% block title %}
+{% endblock title %}
+
+
+<!-- Block Body -->
+{% block body %}
+<div>
+
+    <!-- Shows all task -->
+    <div class="container">
+        <table class="table table-hover table-stripped table-bordered table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Task Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Project</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in data %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{d.TaskName}}</td>
+                    <td>{{d.TDescription}}</td>
+                    <td>{{d.Project}}</td>
+                    <td>{{d.Status}}</td>
+                    <td><a href="{% url 'edittask' d.id %}"><i class="bi bi-pencil-square"></i></a></td>
+                    <td><a href="{% url 'deletetask' d.id %}"><i class="bi bi-trash3-fill"></i></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+{% endblock body %}

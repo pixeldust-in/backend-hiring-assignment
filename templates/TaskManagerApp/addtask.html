@@ -1,0 +1,97 @@
+<!-- Extended base.html file to home.html -->
+{% extends 'TaskManagerApp/base.html' %}
+
+<!-- CSS block -->
+{% block CSS %}
+{% endblock CSS %}
+
+<!-- JS Block -->
+{% block JS %}
+{% endblock JS %}
+
+<!-- Title Block -->
+{% block title %}
+{% endblock title %}
+
+
+<!-- Block Body -->
+{% block body %}
+<div class="container">
+
+    <!-- form to add task -->
+    <form action="{% url 'addtask' %}" method="post">
+
+        {% csrf_token %}
+
+        <div class=" text-dark mb-3 fw-bold">
+
+            <label for="id_TaskName">Task Name:<span style="color:red">*</span></label>
+            <input type="text" name="TaskName" class="form-control" maxlength="100" required id="id_TaskName">
+            <span style="color: red;">{{form.TaskName.errors}}</span>
+
+        </div>
+
+        <div class=" text-dark mb-3 fw-bold">
+
+            <label for="id_TDescription">Task Description:<span style="color:red">*</span></label>
+            <textarea name="TDescription" cols="40" rows="10" class="form-control" required id="id_TDescription">
+</textarea>
+            <span style="color: red;">{{form.TDescription.errors}}</span>
+
+        </div>
+
+        <div class=" text-dark mb-3 fw-bold">
+
+            <label for="">Project:<span style="color:red">*</span></label>
+
+            <select name="Project" id="id_Project" class="form-select">
+
+                <!-- forloop for displaying project names which are present in database -->
+                {% for d in data %}
+                <option name="Project" value="{{d.id}}" id="id_Project_{{forloop.counter0}}">{{d.ProjectName}}</option>
+                {% endfor %}
+            </select>
+            
+            <span style="color: red;">{{form.Project.errors}}</span>
+
+        </div>
+
+        <div class=" text-dark mb-3 fw-bold">
+
+            <label>Status:<span style="color:red">*</span></label>
+            <div id="id_Status">
+                <div>
+                    <label for="id_Status_0"><input type="radio" name="Status" value="TODO" required id="id_Status_0">
+                        TODO</label>
+
+                </div>
+                <div>
+                    <label for="id_Status_1"><input type="radio" name="Status" value="WIP" required id="id_Status_1">
+                        WIP</label>
+
+                </div>
+                <div>
+                    <label for="id_Status_2"><input type="radio" name="Status" value="ONHOLD" required id="id_Status_2">
+                        ONHOLD</label>
+
+                </div>
+                <div>
+                    <label for="id_Status_3"><input type="radio" name="Status" value="DONE" required id="id_Status_3">
+                        DONE</label>
+
+                </div>
+            </div>
+            <span style="color: red;">{{form.Status.errors}}</span>
+
+        </div>
+
+
+
+        <div class="mb-3 text-center">
+
+            <input type="submit" value="Save" class="btn btn-success btn-lg">
+
+        </div>
+    </form>
+</div>
+{% endblock body %}

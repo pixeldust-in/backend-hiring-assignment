@@ -1,0 +1,118 @@
+<!-- Extended base.html file to home.html -->
+{% extends 'TaskManagerApp/base.html' %}
+
+<!-- CSS block -->
+{% block CSS %}
+{% endblock CSS %}
+
+<!-- JS Block -->
+{% block JS %}
+
+<!-- JQuery Datepicker -->
+<script>
+    $(document).ready(function () {
+        $("#id_EndDate").datepicker({ changeMonth: true, changeYear: true, yearRange: '2023:2050' });
+    })
+</script>
+
+{% endblock JS %}
+
+<!-- Title Block -->
+{% block title %}
+{% endblock title %}
+
+
+<!-- Block Body -->
+{% block body %}
+
+<!-- Modal to add client name in Client model using form in MODAL body -->
+<div class="container text-end">
+    <a href="" class="btn btn-secondary text-light" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Client</a>
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Client Name</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-start">
+
+                    <!-- Form to add client name -->
+                    <form action="{% url 'addclient' %}" method="post">
+
+                        {% csrf_token %}
+                        
+                        {% for f in form1 %}
+                        
+                        {{f.label_tag}}
+                        {{f}} 
+                        {{f.errors}}
+                        
+                        {% endfor %}
+                        
+                        <div class="text-center pt-2">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+<!-- Form to add Project in project Model -->
+
+    <form action="{% url 'addproject' %}" method="post">
+
+        {% csrf_token %}
+
+        <div class=" text-dark mb-3 fw-bold">
+            <label for="id_ProjectName">Project Name:<span style="color:red">*</span></label>
+            <input type="text" name="ProjectName" class="form-control" maxlength="100" required id="id_ProjectName">
+            <span style="color: red;">{{form.ProjectName.errors}}</span>
+        </div>
+
+
+        <div class=" text-dark mb-3 fw-bold">
+            <label for="id_PDescription">Description:<span style="color:red">*</span></label>
+            <textarea name="PDescription" cols="40" rows="10" class="form-control" required
+                id="id_PDescription"></textarea>
+            <span style="color: red;">{{form.PDescription.errors}}</span>
+        </div>
+
+
+        <div class=" text-dark mb-3 fw-bold">
+            <label for="">Client Name:<span style="color:red;">* If client doesn't exist use Add Client option to add new client.</span></label>
+            <select name="Client" id="id_Client" class="form-select">
+                {% for d in data %}
+                <option name="Client" value="{{d.id}}" id="id_Client_{{forloop.counter0}}">{{d.ClientName}}</option>
+                {% endfor %}
+            </select>
+            <span style="color: red;">{{form.Client.errors}}</span>
+        </div>
+
+
+        <div class=" text-dark mb-3 fw-bold">
+            <label for="id_EndDate">End Date:</label>
+            <input type="text" name="EndDate" class="Datepicker form-control" id="id_EndDate">
+            <span style="color: red;">{{form.EndDate.errors}}</span>
+        </div>
+
+
+        <div class="mb-3 text-center">
+
+            <input type="submit" value="Save" class="btn btn-success btn-lg">
+
+        </div>
+
+    </form>
+</div>
+{% endblock body %}
