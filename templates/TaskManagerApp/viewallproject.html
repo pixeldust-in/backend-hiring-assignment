@@ -1,0 +1,63 @@
+<!-- Extended base.html file to home.html -->
+{% extends 'TaskManagerApp/base.html' %}
+
+<!-- CSS block -->
+{% block CSS %}
+{% endblock CSS %}
+
+<!-- JS Block -->
+{% block JS %}
+{% endblock JS %}
+
+<!-- Title Block -->
+{% block title %}
+{% endblock title %}
+
+
+<!-- Block Body -->
+{% block body %}
+
+<!-- Shows all the projects present in database irrespective of their EndDate -->
+<div>
+    <div class="container">
+        <table class="table table-hover table-stripped table-bordered table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Project Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in page.object_list %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td><a href="{% url 'viewtask' d.id %}" class="text-decoration-none">{{d.ProjectName}}</a></td>
+                    <td>{{d.PDescription}}</td>
+                    <td>{{d.Client}}</td>
+                    <td>{{d.StartDate}}</td>
+                    <td>{{d.EndDate}}</td>
+                    <td><a href="{% url 'editproject' d.id %}"><i class="bi bi-pencil-square"></i></a></td>
+                    <td><a href="{% url 'deleteproject' d.id %}"><i class="bi bi-trash3-fill"></i></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-center">
+            {% if page.has_previous %}
+            <a href="{% url 'viewallproject' %}?page={{page.previous_page_number}}">Previous Page</a>
+            {% endif %}
+
+            {% if page.has_next %}
+            <a href="{% url 'viewallproject' %}?page={{page.next_page_number}}">Next Page</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock body %}
