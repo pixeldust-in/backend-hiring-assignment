@@ -1,0 +1,96 @@
+{% extends 'TaskManagementApp/base.html' %}
+{% block css %}
+{% endblock css %}
+
+{% block js %}
+{% endblock js %}
+
+{% block title %}
+<title>Add Task</title>
+{% endblock title %}
+
+<!-- body block -->
+
+{% block body %}
+
+<!-- main division -->
+<div class="container shadow mt-5 p-5">
+
+    <!-- form for add task -->
+
+    <form action="{% url 'addtask' %}" method="post">
+        {% csrf_token %}
+
+        <div class="text-dark mb-3 fw-bold">
+            <label for="id_taskname">Task Name:</label>
+            <input type="text" name="taskname" class="form-control" required id="id_taskname">
+            <span style="color: red;">{{form.projectname.errors}}</span>
+        </div>
+
+
+
+        <div class="text-dark mb-3 fw-bold">
+            <label for="id_t_description">Task Description</label>
+            <textarea name="t_description" id="id_t_description" cols="30" rows="10" class="form-control"
+                required></textarea>
+            <span style="color: red;">{{form.p_descrption.errors}}</span>
+        </div>
+
+
+
+        <div class="text-dark mb-3 fw-bold">
+            <label for="">Project Name:</label>
+            <select name="projectname" id="id_projectname" class="form-select">
+                {% for d in data %}
+                <option name="projectname" value="{{d.id}}" id="id_projectname_{{forloop.counter0}}">{{d.projectname}}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <span style="color: red;">{{form.client.errors}}</span>
+
+
+
+
+        <div class="text-dark mb-3 fw-bold">
+
+            <label>Status: <span style="color: red;">*</span></label>
+            <div id="id_status">
+
+                <div>
+                    <label for="id_status_0"><input type="radio" name="status" value="TODO" required
+                            id="id_status_0">TODO</label>
+                </div>
+
+                <div>
+                    <label for="id_status_1"><input type="radio" name="status" value="WIP" required
+                            id="id_status_1">WIP</label>
+                </div>
+
+                <div>
+                    <label for="id_status_2"><input type="radio" name="status" value="ONHOLD" required
+                            id="id_status_2">ONHOLD</label>
+                </div>
+
+                <div>
+                    <label for="id_status_3"><input type="radio" name="status" value="DONE" required
+                            id="id_status_3">DONE</label>
+                </div>
+            </div>
+            <span style="color: red;">{{form.Status.errors}}</span>
+
+        </div>
+
+
+
+        <div class="mb-3 text-center">
+
+            <input type="submit" value="Save" class="btn btn-success btn-lg">
+
+        </div>
+
+    </form>
+</div>
+<!-- end div -->
+
+{% endblock body %}

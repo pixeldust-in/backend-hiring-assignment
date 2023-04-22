@@ -1,0 +1,113 @@
+{% extends 'TaskManagementApp/base.html' %}
+{% block css %}
+{% endblock css %}
+
+{% block js %}
+<script>
+    $(document).ready(function () {
+        $("#id_enddate").datepicker({ changeMonth: true, changeYear: true, yearRange: '2023:2050' });
+    })
+</script>
+{% endblock js %}
+
+{% block title %}
+<title>Add Project</title>
+{% endblock title %}
+
+<!-- Body Block -->
+{% block body %}
+
+<!-- main division -->
+<div class="container shadow mt-5 p-5">
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'addclient' %}" method="post">
+
+                        {% csrf_token %}
+
+                        {% for f in form1 %}
+
+                        {{f.label_tag}}
+                        {{f}}
+                        {{f.errors}}
+
+                        {% endfor %}
+
+                        <div class="text-center pt-2">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- form for addproject -->
+    <form action="{% url 'addproject' %}" method="post">
+        {% csrf_token %}
+
+        <div class="text-dark mb-3 fw-bold">
+            <label for="id_projectname">Project Name:</label>
+            <input type="text" name="projectname" class="form-control" required id="id_projectname">
+            <span style="color: red;">{{form.projectname.errors}}</span>
+        </div>
+
+
+        <div class="text-dark mb-3 fw-bold">
+            <label for="id_p_descrption">Description</label>
+            <textarea name="p_descrption" id="id_p_descrption" cols="30" rows="10" class="form-control"
+                required></textarea>
+            <span style="color: red;">{{form.p_descrption.errors}}</span>
+        </div>
+
+
+        <div class="text-dark mb-3 fw-bold">
+            <label for="">Client Name:
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-sm m-2" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
+                    Click Here To Add Client
+                </button>
+            </label>
+
+            <select name="client" id="id_client" class="form-select">
+                {% for d in data %}
+                <option name="client" value="{{d.id}}" id="id_client_{{forloop.counter0}}">{{d.clientname}}</option>
+                {% endfor %}
+            </select>
+
+        </div>
+        <span style="color: red;">{{form.client.errors}}</span>
+
+
+
+        <div class="text-dark mb-3 fw-bold">
+            <label for="id_enddate">End Date:</label>
+            <input type="text" name="enddate" class="Datepicker form-control" id="id_enddate">
+            <span style="color: red;">{{form.enddate.errors}}</span>
+        </div>
+
+
+        <div class="mb-3 text-center">
+
+            <input type="submit" value="Save" class="btn btn-lg btn-success">
+
+        </div>
+
+    </form>
+
+</div>
+
+<!-- </div> -->
+{% endblock body %}

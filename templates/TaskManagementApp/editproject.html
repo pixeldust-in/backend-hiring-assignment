@@ -1,0 +1,81 @@
+{% extends 'TaskManagementApp/base.html' %}
+{% block css %}
+{% endblock css %}
+
+{% block js %}
+<script>
+    $(document).ready(function () {
+        $("#id_enddate").datepicker({ changeMonth: true, changeYear: true, yearRange: '2023:2050' });
+    })
+</script>
+{% endblock js %}
+
+{% block title %}
+<title>Edit Project</title>
+{% endblock title %}
+
+<!-- Body Block -->
+{% block body %}
+
+<!-- main division -->
+
+<div class="container">
+    <!-- form for editproject -->
+
+    <form action="{% url 'editproject' data.id %}" method="post">
+        {% csrf_token %}
+
+        <div class="text-dark mb-3 fw-bold">
+
+            <label for="id_projectname">Project Name:</label>
+            <input type="text" name="projectname" class="form-control" hidden value="{{data.projectname}}" required
+                id="id_projectname">
+            <input type="text" name="projectname" class="form-control" disabled value="{{data.projectname}}" required
+                id="id_projectname">
+
+        </div>
+
+
+
+        <div class="text-dark mb-3 fw-bold">
+
+            <label for="id_p_descrption">Description</label>
+            <textarea name="p_descrption" id="id_p_descrption" cols="30" rows="10" class="form-control" hidden
+                required>{{data.p_descrption}}</textarea>
+            <textarea name="p_descrption" id="id_p_descrption" cols="30" rows="10" class="form-control" disabled
+                required>{{data.p_descrption}}</textarea>
+
+        </div>
+
+
+        <div class="text-dark mb-3 fw-bold">
+            <label for="id_client">Client Name: </label>
+            <input type="text" name="client" class="form-control" disabled value="{{data.client}}" required
+                id="id_client">
+            <input type="text" name="client" class="form-control" hidden value="{{data.client}}" required
+                id="id_client">
+
+        </div>
+
+
+
+        <div class="text-dark mb-3 fw-bold">
+            <label for="id_enddate">End Date:</label>
+            <input type="text" name="enddate" class="Datepicker form-control" id="id_enddate">
+            <span style="color: red;">{{form.enddate.errors}}</span>
+
+        </div>
+
+
+        <div class="mb-3 text-center">
+
+            <input type="submit" value="Save" class="btn btn-lg btn-success">
+
+        </div>
+
+    </form>
+
+</div>
+
+<!-- </div> -->
+{% endblock body %}

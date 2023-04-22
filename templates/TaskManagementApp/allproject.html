@@ -1,0 +1,94 @@
+{% extends 'TaskManagementApp/base.html' %}
+{% block css %}
+<style>
+    #heading1{
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        padding-left: 5px;
+        margin-left: 5px;
+    }
+    #heading2{
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        padding-right: 5px;
+        
+    }
+</style>
+{% endblock css %}
+
+{% block js %}
+{% endblock js %}
+
+{% block title %}
+<title>All Projects</title>
+{% endblock title %}
+
+<!-- body block -->
+
+{% block body %}
+
+<!-- main division -->
+
+
+<div class="row ms-5">
+
+    {% for d in data %}
+
+    <!-- bootstrap card -->
+
+    <div class="card my-5 mx-5 shadow" style="width: 42rem;">
+        <div class="card-body row">
+
+            <h5 class="card-title text-center m-2 pb-2" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
+                {{d.projectname}}</h5>
+
+
+            <div class="col-3 ms-5">
+                <h5 id="heading1" class="ms-3">Description</h5>
+            </div>
+            <div id="heading2" class="col-8">
+                {{d.p_descrption}}
+            </div>
+
+
+
+            <div class="col-3 ms-5">
+                <h5 id="heading1" class="ms-3">Client Name</h5>
+            </div>
+            <div id="heading2" class="col-8">
+                {{d.client}}
+            </div>
+
+
+
+            <div class="col-3 ms-5">
+                <h5 id="heading1" class="ms-3">Start Date</h5>
+            </div>
+            <div id="heading2" class="col-8">
+                {{d.startdate}}
+            </div>
+
+
+
+            <div class="col-3 ms-5">
+                <h5 id="heading1" class="ms-3">End Date</h5>
+            </div>
+            <div id="heading2" class="col-8">
+                {{d.enddate}}
+            </div>
+
+        </div>
+
+
+        <div class="d-grid gap-2 d-md-block ms-5 ps-5 mb-2">
+
+            <a href="{% url 'viewprojecttask' d.id %}" class="btn btn-outline-primary fw-bold">View Task</a>
+            <a href="{% url 'editproject' d.id %}" class="btn btn-outline-success fw-bold">Edit Project</a>
+            <a href="{% url 'deleteproject' d.id %}" class="btn btn-outline-danger fw-bold">Delete Project</a>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+</div>
+<!-- end div -->
+{% endblock body %}
