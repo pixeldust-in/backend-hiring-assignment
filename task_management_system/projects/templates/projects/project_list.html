@@ -2,7 +2,7 @@
 
 
 {% block content %}
-    
+    <a href="{% url 'homepage' %}">Home</a>
 
     <a href="{% url 'client-create' %}" class="btn btn-primary">Create New Client</a>
 
@@ -21,4 +21,6 @@
         <li>No projects found.</li>
       {% endfor %}
     </ul>
+    <a href="{% url 'task-list' %}">Create New Task</a>
+    
 {% endblock %}

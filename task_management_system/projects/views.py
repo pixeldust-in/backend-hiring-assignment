@@ -1,6 +1,11 @@
+from django.shortcuts import render
 from .models import Project, Client
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .forms import ClientForm
+
+
+def homepage(request):
+    return render(request, 'projects/home.html')
 
 class ProjectListView(ListView):
     model = Project
