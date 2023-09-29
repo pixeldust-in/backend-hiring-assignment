@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <a href="{% url 'homepage' %}">Home</a>
+
+    <a href="{% url 'client-create' %}" class="btn btn-primary">Create New Client</a>
+
+    <a href="{% url 'project-create' %}">Create New Project</a>
+    <h2>All the Projects:</h2>
+    <ul>
+      
+      {% for project in all_project %}
+      <li>
+        <span>
+          <a href="{% url 'project-update' project.pk %}">{{ project.project_name }}</a>
+          <a href="{% url 'project-delete' project.pk %}">Delete</a>
+        </span>
+      </li>  
+      {% empty %}
+        <li>No projects found.</li>
+      {% endfor %}
+    </ul>
+    <a href="{% url 'task-list' %}">Create New Task</a>
+    
+{% endblock %}
